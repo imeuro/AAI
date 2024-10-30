@@ -603,9 +603,12 @@ section.banda-home .section-title a {
     line-height: 34px;
 }
 .single article .entry-content p.has-drop-cap:not(:focus)::first-letter {
-    font-size: 5em;
-    margin-top: 0.1em;
+    font-size: 120px;
+    line-height: 120px;
+    margin: 0;
     text-transform: uppercase;
+    initial-letter: 3;
+    font-weight: 700;
 }
 
 .single article .wp-block-image {
