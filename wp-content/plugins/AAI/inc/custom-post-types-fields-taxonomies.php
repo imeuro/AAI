@@ -1,0 +1,2 @@
+<?php
+// vedi CPT plugin!
