@@ -121,6 +121,8 @@ if (bodyClasses.contains('post-template-default') === true) {
     });
 
   }
+
+  LoadHPCont();
 }
-LoadHPCont();
+
 

@@ -609,6 +609,7 @@ section.banda-home .section-title a {
     text-transform: uppercase;
     initial-letter: 3;
     font-weight: 700;
+    margin-right: 10px;
 }
 
 .single article .wp-block-image {
