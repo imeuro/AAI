@@ -155,10 +155,10 @@ function manage_jquery_YITH_loading() {
         is_search()) { 
 			// forzo le impostazioni di YITH infinite scroll:
 			wp_localize_script('yith-infinitescroll', 'yith_infs', array(
-				'nav_selector' => '.navigation',
-				'next_selector' => '.nav-links a.next',
-				'post_selector' => 'article.status-publish',
-				'content_selector' => '.posts.infinite',
+				'navSelector' => '.navigation',
+				'nextSelector' => '.nav-links a.next',
+				'postSelector' => 'article.status-publish',
+				'contentSelector' => '.posts.infinite',
 			));
 	} else {
 		wp_deregister_script('jquery');
