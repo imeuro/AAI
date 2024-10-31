@@ -11,21 +11,6 @@
 
 global $paged, $postCount, $style, $lastPostYear; ?>
 
-<?php 
-// if ($postCount === 1 && $paged === 0) : 
-// echo '$page'.$paged;
-// echo '$lastPostYear'.$GLOBALS['lastPostYear'];
-
-/*
-	if ( get_the_date("Y") != $GLOBALS['lastPostYear']) {
-		if ($paged == 0 && $postCount !== 1) {
-			echo '<h2 class="heading_year">'.get_the_date("Y").'</h2>';
-		}
-	}
-	$GLOBALS['lastPostYear'] = get_the_date("Y");
-*/
-?>
-
 	<article id="post-<?php the_ID(); ?>" <?php post_class('HP-item-opening'); ?> data-year="<?php echo get_the_date("Y"); ?>">
 		<a href="<?php echo esc_url( get_permalink() ); ?>" rel="bookmark">
 			<header class="entry-header">

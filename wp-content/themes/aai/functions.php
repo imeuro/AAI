@@ -128,7 +128,14 @@ function aai_scripts() {
 	wp_enqueue_script( 'aai-interact', 'https://cdnjs.cloudflare.com/ajax/libs/interact.js/1.10.21/interact.min.js', array(), _S_VERSION, true );
 	wp_enqueue_script( 'aai-scripts', get_template_directory_uri() . '/assets/aai.js', array('aai-interact'), _S_VERSION, true );
 
-	if ( !is_admin() ) wp_deregister_script('jquery');
+	// non si puo' rimuovere jQuery del tutto senno' si scassa infinite scroll
+	if (!is_admin() && 
+        !is_page_template('template-home.php') && 
+        !is_home() && 
+        !is_archive() && 
+        !is_search()) {
+        wp_deregister_script('jquery');
+    }
 
 }
 add_action( 'wp_enqueue_scripts', 'aai_scripts' );
@@ -241,4 +248,3 @@ function print_meta_description() {
     }
 }
 add_action( 'wp_head', 'print_meta_description');
-
