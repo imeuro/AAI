@@ -134,7 +134,15 @@ function aai_scripts() {
         !is_home() && 
         !is_archive() && 
         !is_search()) {
+
         wp_deregister_script('jquery');
+		// già che ci sono, forzo le impostazioni di YITH infinite scroll:
+		wp_localize_script('yith-infinitescroll', 'yith_infs', array(
+			'nav_selector' => '.navigation',
+			'next_selector' => '.nav-links a.next',
+			'post_selector' => 'article.status-publish',
+			'content_selector' => '.posts.infinite',
+		));
     }
 
 }
