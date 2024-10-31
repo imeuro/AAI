@@ -148,21 +148,13 @@ function aai_scripts() {
 add_action( 'wp_enqueue_scripts', 'aai_scripts' );
 
 function manage_jquery_YITH_loading() {
-    if (is_admin() || 
-        is_page_template('template-home.php') || 
-        is_home() || 
-        is_archive() || 
-        is_search()) { 
-			// forzo le impostazioni di YITH infinite scroll:
-			wp_localize_script('yith-infinitescroll', 'yith_infs', array(
-				'navSelector' => '.navigation',
-				'nextSelector' => '.nav-links a.next',
-				'postSelector' => 'article.status-publish',
-				'contentSelector' => '.posts.infinite',
-			));
-	} else {
-		wp_deregister_script('jquery');
-    }
+    if (!is_admin() && 
+        !is_page_template('template-home.php') && 
+        !is_home() && 
+        !is_archive() && 
+        !is_search()) { 
+        wp_deregister_script('jquery');
+	}
 }
 add_action('wp_enqueue_scripts', 'manage_jquery_YITH_loading');
 
