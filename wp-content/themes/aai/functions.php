@@ -148,10 +148,10 @@ function aai_scripts() {
 add_action( 'wp_enqueue_scripts', 'aai_scripts' );
 
 function manage_jquery_YITH_loading() {
-    if (is_admin() && 
-        is_page_template('template-home.php') && 
-        is_home() && 
-        is_archive() && 
+    if (is_admin() || 
+        is_page_template('template-home.php') || 
+        is_home() || 
+        is_archive() || 
         is_search()) { 
 			// forzo le impostazioni di YITH infinite scroll:
 			wp_localize_script('yith-infinitescroll', 'yith_infs', array(
