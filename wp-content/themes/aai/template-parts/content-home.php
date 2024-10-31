@@ -9,9 +9,11 @@
 
 
 
-global $paged, $postCount, $style, $lastPostYear; ?>
+global $paged, $postCount, $style, $lastPostYear; 
+$posteven = $postCount % 2 ? 'post-even' : 'post-odd';
+?>
 
-	<article id="post-<?php the_ID(); ?>" <?php post_class('HP-item-opening'); ?> data-year="<?php echo get_the_date("Y"); ?>">
+	<article id="post-<?php the_ID(); ?>" <?php post_class(array('HP-item-opening',$posteven)); ?> data-year="<?php echo get_the_date("Y"); ?>">
 		<a href="<?php echo esc_url( get_permalink() ); ?>" rel="bookmark">
 			<header class="entry-header">
 				<?php the_title( '<h2 class="entry-title">', '</h2>' ); ?>
