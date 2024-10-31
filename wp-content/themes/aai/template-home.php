@@ -21,7 +21,7 @@ $banda = 0;
 ?>
 
 	<main id="primary" class="content-area site-main homepage infinite">
-		<div class="posts">
+		<div class="posts" id="main">
 		<?php
 
 		// Get all post IDs of the post type you want to exclude
@@ -63,7 +63,8 @@ $banda = 0;
 			endwhile;
 
 		if ($HPquery->max_num_pages > 1) : ?> <!-- Importante: mostra navigazione solo se ci sono più pagine -->
-        <nav class="navigation pagination" role="navigation"> <!-- Classe navigation necessaria per YITH -->
+        <nav class="navigation pagination" role="navigation"> 
+			<!-- Classe navigation necessaria per YITH -->
             <div class="nav-links">
                 <?php
                 echo paginate_links(array(
