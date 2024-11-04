@@ -1,5 +1,6 @@
 // basics
 const bodyClasses = document.body.classList; // usage: bodyClasses.contains('my-class-name')
+const LANG = document.documentElement.lang === 'en-GB' ? 'en/' : '';
 const ENV = window.location.host;
 let devENV = null;
 let basepath = '/';
@@ -72,7 +73,7 @@ if (bodyClasses.contains('post-template-default') === true) {
     fillnonce = null;
 
   LoadHPCont = () => {
-    fetch(basepath) // fetch homepage URL
+    fetch(basepath+LANG) // fetch homepage URL
     .then(function(response) {
         return response.text();
     })
