@@ -44,9 +44,11 @@ get_header();
 					array(
 						'key' => 'aai_agenda_data_inizio',
 						'value' => $today,
-						'compare' => '>='
+						'compare' => '>=',
+						'type' => 'DATE'
 					)
-				)
+				),
+				'lang' => 'it' // Force Italian posts iven if it's english (for Polylang
 			);
 			$query = new WP_Query($args);
 
