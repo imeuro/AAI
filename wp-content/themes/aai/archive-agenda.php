@@ -18,7 +18,7 @@ get_header();
 			the_archive_title( '<h1 class="page-title">', '</h1>' );
 			?>
 			<div class="archive-description">
-				<?php if ($_GET['lang'] == 'en') : ?>
+				<?php if (pll_current_language() == 'en') : ?>
 					<p><em>Discover the exhibitions of the members<br> of the Association of Italian Antiquarians,<br> and those to visit in museums,<br> in Italy and abroad</em></p>
 				<?php else : ?>
 					<p><em>Scopri le mostre dei membri<br> dell'Associazione Antiquari d'Italia,<br> e quelle da visitare nei musei,<br> in Italia e all'estero</em></p>
@@ -48,7 +48,7 @@ get_header();
 						'type' => 'DATE'
 					)
 				),
-				'lang' => 'it' // Force Italian posts iven if it's english (for Polylang
+				'lang' => 'it' // Force Italian posts iven if it's english (for Polylang)
 			);
 			$query = new WP_Query($args);
 
