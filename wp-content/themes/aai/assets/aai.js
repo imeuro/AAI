@@ -69,6 +69,7 @@ if (bodyClasses.contains('post-template-default') === true) {
 
   bodyClasses.add('moreposts');
   let postareaTarget = document.getElementById('wrap');
+  const currentpostID = postareaTarget.querySelector('article').id;
   let postareaDiv,
     fillnonce = null;
 
@@ -83,9 +84,20 @@ if (bodyClasses.contains('post-template-default') === true) {
       let doc = parser.parseFromString(html, "text/html");
 
       
-      let HPDOM = doc.querySelector('#primary').innerHTML;
-        
+      let HPDOM = doc.querySelector('#primary');
+      let articles = Array.from(HPDOM.querySelectorAll('article'));
+      let articleIds = articles.map(article => article.id);
+      
+      // Remove current article if found: we don't want to suggest the same article we are reading 
+      if (articleIds.includes(currentpostID)) {
+        let currentArticle = articles.find(article => article.id === currentpostID);
+        currentArticle.remove();
+      }
+      
+      HPDOM = HPDOM.innerHTML;
+      
       console.debug(HPDOM);
+      console.debug(currentpostID);
 
       // create container div
       postareaDiv = document.createElement('div');
@@ -118,7 +130,7 @@ if (bodyClasses.contains('post-template-default') === true) {
       })
     })
     .catch(function(err) {  
-      console.log('Failed to fetch page: ', err);
+      console.debug('Failed to fetch page: ', err);
     });
 
   }
