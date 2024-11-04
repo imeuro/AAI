@@ -19,7 +19,7 @@ get_header();
 			?>
 			<div class="archive-description">
 				<?php if (pll_current_language() == 'en') : ?>
-					<p><em>Discover the exhibitions of the members<br> of the Association of Italian Antiquarians,<br> and those to visit in museums,<br> in Italy and abroad</em></p>
+					<p><em>Discover the exhibitions of the AAI members<br> and those to be visited in museums,<br> in Italy and abroad</em></p>
 				<?php else : ?>
 					<p><em>Scopri le mostre dei membri<br> dell'Associazione Antiquari d'Italia,<br> e quelle da visitare nei musei,<br> in Italia e all'estero</em></p>
 				<?php endif; ?>
