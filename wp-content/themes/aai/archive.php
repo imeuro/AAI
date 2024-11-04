@@ -10,7 +10,6 @@
 get_header();
 $postCount = 0;
 ?>
-ARCHIVE.php
 	<main id="primary" class="archive site-main infinite">
 
 		<?php if ( have_posts() ) : ?>

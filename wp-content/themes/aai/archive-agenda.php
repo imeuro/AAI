@@ -16,10 +16,13 @@ get_header();
 		<header class="page-header">
 			<?php
 			the_archive_title( '<h1 class="page-title">', '</h1>' );
-			// the_archive_description( '<div class="archive-description">', '</div>' );
 			?>
 			<div class="archive-description">
-				<p><em>Scopri le mostre dei membri<br> dell'Associazione Antiquari d'Italia,<br> e quelle da visitare nei musei,<br> in Italia e all'estero</em></p>
+				<?php if (pll_lang() == 'en') : ?>
+					<p><em>Discover the exhibitions of the members<br> of the Association of Italian Antiquarians,<br> and those to visit in museums,<br> in Italy and abroad</em></p>
+				<?php else : ?>
+					<p><em>Scopri le mostre dei membri<br> dell'Associazione Antiquari d'Italia,<br> e quelle da visitare nei musei,<br> in Italia e all'estero</em></p>
+				<?php endif; ?>
 			</div>
 		</header><!-- .page-header -->
 
