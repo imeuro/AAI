@@ -629,6 +629,8 @@ section.banda-home .section-title a {
     margin: 0 5vw 5vh 20px;
     font-size: 11px;
     line-height: 17px;
+    margin: 0;
+    max-width: 90vw;
 }
 
 div#post-area.append-posts {
@@ -678,6 +680,14 @@ div#post-area.append-posts .navigation {
     .single article figcaption.wp-element-caption {
         font-size: 13px;
         line-height: 18px;
+    }
+    .single article .wp-block-image.alignfull figcaption.wp-element-caption {
+        max-width: 768px;
+        margin: 0 auto;
+    }
+    .single article .wp-block-image.alignwide figcaption.wp-element-caption {
+        max-width: 768px;
+        margin: 0;
     }
 }
 
