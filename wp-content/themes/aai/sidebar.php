@@ -12,7 +12,7 @@ if ( ! is_active_sidebar( 'sidebar-1' ) ) {
 }
 ?>
 
-<aside id="secondary" class="widget-area desktop">
+<aside id="secondary" class="widget-area">
 	<!-- polylang: get the link for english version -->
 	<?php
 	if ( function_exists( 'pll_the_languages' ) ) : ?>

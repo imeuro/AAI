@@ -209,6 +209,7 @@ header#masthead {
 }
 .main-navigation {
     position: absolute;
+    z-index: 10;
     flex: 0 1 auto;
     margin: 0;
     padding: 0;
@@ -216,7 +217,6 @@ header#masthead {
 }
 .main-navigation.toggled { 
     position: fixed;
-    z-index: 10;
     background: #ffffffb8;
     width: 100vw;
     height: 100vh;
@@ -234,6 +234,7 @@ header#masthead {
 }
 .main-navigation.toggled button.menu-toggle {
     background: url('./img/x.svg') no-repeat center center;
+    top: 40px;
 }
 .main-navigation .menu-topp-container {
     position: fixed;
@@ -279,6 +280,20 @@ header#masthead {
     .main-navigation  ul li.focus >  ul.sub-menu a {
         font-size: 20px;
         line-height: 30px;
+    }
+    .main-navigation~#secondary {
+        position: fixed;
+        left: -100vw;
+        transition: left 250ms ease-in-out;
+    }
+
+    .main-navigation.toggled~#secondary {
+        display: block;
+        position: fixed;
+        left: 20px;
+        bottom: 120px;
+        z-index: 1000;
+        height: 120px;
     }
 }
 
@@ -385,8 +400,6 @@ header .widget_search .wp-block-search__inside-wrapper .wp-block-search__button 
     left: -10px;
     position: relative;
 }
-
-
 
 
 
