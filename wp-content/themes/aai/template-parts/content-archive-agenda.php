@@ -7,12 +7,13 @@
  * @package AAI_gazzetta
  */
 
+$language = (isset($_GET['lang'])) ? $_GET['lang'] : 'it';
 ?>
 
 	<article id="post-<?php the_ID(); ?>" <?php post_class('HP-item-opening'); ?>>
 		<div class="event-content">
 			<header class="entry-header">
-				<?php if (pll_current_language() == 'en' && get_field('aai_agenda_title_en')) : ?>
+				<?php if ($language == 'en' && get_field('aai_agenda_title_en')) : ?>
 					<h1 class="entry-title"><?php the_field('aai_agenda_title_en') ?></h1>
 					<?php 
 					if (get_field('aai_agenda_post_excerpt_eng')) :

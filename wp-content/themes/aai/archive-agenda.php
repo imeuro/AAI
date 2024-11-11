@@ -8,6 +8,7 @@
  */
 
 get_header();
+$language = (isset($_GET['lang'])) ? $_GET['lang'] : 'it';
 ?>
 
 	<main id="primary" class="archive archive-agenda site-main infinite">
@@ -18,7 +19,7 @@ get_header();
 			the_archive_title( '<h1 class="page-title">', '</h1>' );
 			?>
 			<div class="archive-description">
-				<?php if (pll_current_language() == 'en') : ?>
+				<?php if ($language == 'en') : ?>
 					<p><em>Discover the exhibitions of the AAI members<br> and those to be visited in museums,<br> in Italy and abroad</em></p>
 				<?php else : ?>
 					<p><em>Scopri le mostre dei membri<br> dell'Associazione Antiquari d'Italia,<br> e quelle da visitare nei musei,<br> in Italia e all'estero</em></p>
