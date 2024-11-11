@@ -48,7 +48,6 @@ get_header();
 						'type' => 'DATE'
 					)
 				),
-				// 'lang' => 'it' // Force Italian posts iven if it's english (for Polylang)
 			);
 			$query = new WP_Query($args);
 
