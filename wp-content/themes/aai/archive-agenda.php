@@ -42,13 +42,13 @@ get_header();
 				'order' => 'DESC',
 				'meta_query' => array(
 					array(
-						'key' => 'aai_agenda_data_inizio',
+						'key' => 'aai_agenda_data_fine',
 						'value' => $today,
 						'compare' => '>=',
 						'type' => 'DATE'
 					)
 				),
-				'lang' => 'it' // Force Italian posts iven if it's english (for Polylang)
+				// 'lang' => 'it' // Force Italian posts iven if it's english (for Polylang)
 			);
 			$query = new WP_Query($args);
 

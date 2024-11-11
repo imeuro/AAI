@@ -12,10 +12,18 @@
 	<article id="post-<?php the_ID(); ?>" <?php post_class('HP-item-opening'); ?>>
 		<div class="event-content">
 			<header class="entry-header">
-				
-				<?php the_title( '<h1 class="entry-title">', '</h1>' ); ?>
-				<p class="entry-excerpt"><?php echo  get_the_excerpt(); ?></p> 
-
+				<?php if (pll_current_language() == 'en' && get_field('aai_agenda_title_en')) : ?>
+					<h1 class="entry-title"><?php the_field('aai_agenda_title_en') ?></h1>
+					<?php 
+					if (get_field('aai_agenda_post_excerpt_eng')) :
+						echo '<p class="entry-excerpt">'.get_field('aai_agenda_post_excerpt_eng').'</p>';
+					endif;
+					?>
+				<?php
+				else:
+					the_title( '<h1 class="entry-title">', '</h1>' ); 
+					echo  '<p class="entry-excerpt">'.get_the_excerpt().'</p>';
+				endif; ?>
 
 				<p class="entry-auth">
 				<?php if (get_field('aai_agenda_data_inizio')) {
