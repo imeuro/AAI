@@ -12,7 +12,7 @@ const themepath = basepath+'wp-content/themes/aai/';
 let LoadHPCont;
 
 
-// aai.js
+// ammenniccolo.js
 const position = { x: 0, y: 0 }
 var angle = 0
 var scale = 1.0
@@ -65,6 +65,7 @@ goHome.addEventListener('click', () => { location.href=basepath; })
 
 
 // foglia: load the posts in homepage as the user approaches the end of page
+// TODO: da rivedere per togliere event listener on scroll
 if (bodyClasses.contains('post-template-default') === true) {
 
   bodyClasses.add('moreposts');
@@ -139,3 +140,52 @@ if (bodyClasses.contains('post-template-default') === true) {
 }
 
 
+
+// home made infinite scroll
+// f*ck YITH 🤟
+
+let Target = document.querySelector('#primary.infinite');
+let TargetPosts = Target.querySelectorAll('article');
+let secondToLastChild = TargetPosts[TargetPosts.length - 2];
+let NextUrl = document.querySelector('.navigation a.next, .navigation .nav-previous a');
+if (Target && NextUrl) {
+  let isLoading = false;
+  const observer = new IntersectionObserver((entries) => {
+    if (entries[0].isIntersecting && !isLoading) {
+      isLoading = true;
+      fetchPosts();
+    }
+  }, {
+    rootMargin: '0px',
+    threshold: 1.0,
+  });
+  observer.observe(secondToLastChild);
+
+  function fetchPosts() {
+    fetch(NextUrl.href)
+      .then(response => response.text())
+      .then(data => {
+        const parser = new DOMParser();
+        const NewDoc = parser.parseFromString(data, 'text/html');
+        let NewPosts = NewDoc.querySelectorAll('#primary.infinite article');
+        if (NewPosts) {
+          NextUrl = NewDoc.querySelector('.navigation a.next, .navigation .nav-previous a');
+          console.debug(NextUrl.href);
+          NewPosts.forEach(post => {
+            // console.debug(post);
+            secondToLastChild.parentElement.appendChild(post);
+          });
+          // prepare for next batch
+          let NewTarget = document.querySelector('#primary.infinite');
+          NewTarget.appendChild(NewDoc.querySelector('.navigation'));
+          secondToLastChild = NewPosts[NewPosts.length - 2];
+          observer.observe(secondToLastChild);
+          isLoading = false;
+          
+        } else {
+          // You've reached the end.
+        }
+      })
+      .catch(error => console.error(error));
+  }
+}

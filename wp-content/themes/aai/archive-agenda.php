@@ -38,17 +38,17 @@ $language = (isset($_GET['lang'])) ? $_GET['lang'] : 'it';
 			    'post_type' => 'agenda',
 			    'paged' => $paged,
 				'posts_per_page' => get_option('posts_per_page'),
-				'meta_key' => 'aai_agenda_data_inizio',
+				'meta_key' => 'aai_agenda_data_fine',
 				'orderby' => 'meta_value',
 				'order' => 'DESC',
-				'meta_query' => array(
-					array(
-						'key' => 'aai_agenda_data_fine',
-						'value' => $today,
-						'compare' => '>=',
-						'type' => 'DATE'
-					)
-				),
+				// 'meta_query' => array(
+				// 	array(
+				// 		'key' => 'aai_agenda_data_fine',
+				// 		'value' => $today,
+				// 		'compare' => '>=',
+				// 		'type' => 'DATE'
+				// 	)
+				// ),
 			);
 			$query = new WP_Query($args);
 

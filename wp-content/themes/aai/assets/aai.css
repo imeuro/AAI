@@ -662,6 +662,7 @@ div#post-area.append-posts:before {
     font-style: italic;
     border-bottom: 1px solid #0006;
 }
+.infinite .navigation,
 div#post-area.append-posts .navigation {
     display: none;
 }
