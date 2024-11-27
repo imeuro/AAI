@@ -530,6 +530,9 @@ article.HP-item-opening .post-thumbnail {
     article.HP-item-opening .post-thumbnail {
         width: 60vw;
     }
+    article.HP-item-opening.post-even .post-thumbnail {
+        text-align: right;
+    }
 
 }
 
