@@ -842,8 +842,8 @@ article.HP-item-opening .entry-header p { margin: 0 0 10px 0; }
 }
 
 
-#mailpoet_form_1 .mailpoet_text, 
-#mailpoet_form_1 .mailpoet_textarea {
+.widget_wysija .wysija-input,
+.widget_wysija .wysija-textarea {
     border: 1px solid rgba(var(--nero), 1.0);
     border-radius: 0;
     color: rgba(var(--nero), 1.0);
@@ -851,7 +851,7 @@ article.HP-item-opening .entry-header p { margin: 0 0 10px 0; }
     font-weight: 500;
     padding: 10px 15px!important;
 }
-#mailpoet_form_1 .mailpoet_submit {
+.widget_wysija .wysija-submit {
     background: rgba(var(--nero), 1.0)0;
     color: rgba(var(--bianco), 1.0);
     font-size: 24px;
