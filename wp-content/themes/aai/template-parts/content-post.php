@@ -30,5 +30,6 @@
 			)
 		);
 		?>
+		<p class="entry-date"><?php echo get_the_date(); ?></p>
 	</div><!-- .entry-content -->
 </article><!-- #post-<?php the_ID(); ?> -->
