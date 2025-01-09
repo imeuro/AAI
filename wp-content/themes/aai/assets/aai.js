@@ -152,6 +152,7 @@ if (Target && NextUrl) {
   let isLoading = false;
   const observer = new IntersectionObserver((entries) => {
     if (entries[0].isIntersecting && !isLoading) {
+      console.debug('intersecting' + entries[0]);
       isLoading = true;
       fetchPosts();
     }
