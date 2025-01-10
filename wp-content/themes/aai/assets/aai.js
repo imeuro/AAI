@@ -150,16 +150,15 @@ let secondToLastChild = TargetPosts[TargetPosts.length - 2];
 let NextUrl = document.querySelector('.navigation a.next, .navigation .nav-previous a');
 let isLoading = false;
 if (Target && NextUrl) {
-  console.debug('intersecting?');
   const observer = new IntersectionObserver((entries) => {
-    if (entries[0].isIntersecting && !isLoading) {
+    if (entries[0].isIntersecting && isLoading===false) {
       console.debug('intersecting' + entries[0]);
       isLoading = true;
       fetchPosts();
     }
   }, {
     rootMargin: '0px',
-    threshold: 1.0,
+    threshold: 0.5,
   });
   observer.observe(secondToLastChild);
 
