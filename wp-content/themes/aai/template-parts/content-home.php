@@ -10,7 +10,6 @@
 
 
 global $paged, $postCount, $style, $lastPostYear; 
-echo $postCount;
 if ( ! post_password_required() ) :
 	$posteven = $postCount % 2 ? 'post-even' : 'post-odd';
 ?>
