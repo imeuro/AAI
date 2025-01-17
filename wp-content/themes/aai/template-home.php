@@ -54,7 +54,7 @@ $banda = 0;
 				get_template_part( 'template-parts/content', 'home' );
 
 				
-				if ($postCount % 3 === 0) {
+				if ($postCount % 3 === 0 && $postCount > 1) {
 					$banda++;
 					// echo $banda;
 					include(get_template_directory() . '/template-parts/home-links.php');
