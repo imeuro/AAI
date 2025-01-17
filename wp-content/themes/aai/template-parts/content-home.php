@@ -10,7 +10,9 @@
 
 
 global $paged, $postCount, $style, $lastPostYear; 
-$posteven = $postCount % 2 ? 'post-even' : 'post-odd';
+
+if ( ! post_password_required() ) :
+	$posteven = $postCount % 2 ? 'post-even' : 'post-odd';
 ?>
 
 	<article id="post-<?php the_ID(); ?>" <?php post_class(array('HP-item-opening',$posteven)); ?> data-year="<?php echo get_the_date("Y"); ?>">
@@ -32,3 +34,4 @@ $posteven = $postCount % 2 ? 'post-even' : 'post-odd';
 			</div><!-- .post-thumbnail -->
 		</a>
 	</article><!-- #post-<?php the_ID(); ?> -->
+<?php endif; ?>
