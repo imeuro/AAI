@@ -29,7 +29,7 @@ get_header();
 			endif;
 
 			/* Start the Loop */
-			while ( have_posts() ) :
+			while ( have_posts() && ! post_password_required()  ) :
 				the_post();
 
 				/*
