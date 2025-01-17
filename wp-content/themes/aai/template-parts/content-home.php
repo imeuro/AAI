@@ -10,8 +10,8 @@
 
 
 global $paged, $postCount, $style, $lastPostYear; 
-// echo $postCount;
-// if ( ! post_password_required() ) :
+echo $postCount;
+if ( ! post_password_required() ) :
 	$posteven = $postCount % 2 ? 'post-even' : 'post-odd';
 ?>
 
@@ -35,7 +35,6 @@ global $paged, $postCount, $style, $lastPostYear;
 		</a>
 	</article><!-- #post-<?php the_ID(); ?> -->
 <?php 
-// else :
-// 	$postCount--;
-// endif; 
-?>
+else :
+	$postCount--;
+endif; ?>
