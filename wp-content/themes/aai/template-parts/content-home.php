@@ -34,4 +34,7 @@ if ( ! post_password_required() ) :
 			</div><!-- .post-thumbnail -->
 		</a>
 	</article><!-- #post-<?php the_ID(); ?> -->
-<?php endif; ?>
+<?php 
+else :
+	$postCount--;
+endif; ?>
