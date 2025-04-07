@@ -121,8 +121,11 @@ add_filter( 'script_loader_tag', 'add_defer_forscript', 10, 3 );
 
 function aai_scripts() {
 	wp_enqueue_style( 'aai-base-style', get_template_directory_uri() . '/style.min.css', array(), _S_VERSION );
-	wp_enqueue_style( 'aai-style', get_template_directory_uri() . '/assets/aai.css', array('aai-base-style'), _S_VERSION );
+	wp_enqueue_style( 'aai-style', get_template_directory_uri() . '/assets/css/aai.css', array('aai-base-style'), _S_VERSION );
 	wp_style_add_data( 'aai-style', 'rtl', 'replace' );
+	    if (is_front_page()) {
+        wp_enqueue_style('aai-home', get_template_directory_uri() . '/assets/css/aai-home.css', array('aai-style'), _S_VERSION);
+    }
 
 	wp_enqueue_script( 'aai-navigation', get_template_directory_uri() . '/js/navigation.js', array(), _S_VERSION, true );
 	wp_enqueue_script( 'aai-interact', 'https://cdnjs.cloudflare.com/ajax/libs/interact.js/1.10.21/interact.min.js', array(), _S_VERSION, true );
@@ -266,12 +269,3 @@ function print_meta_description() {
     }
 }
 add_action( 'wp_head', 'print_meta_description');
-
-// Registra e carica il file CSS aai.css
-function aai_enqueue_styles() {
-    wp_enqueue_style('aai-style', get_template_directory_uri() . '/assets/css/aai.css', array(), _S_VERSION);
-    if (is_front_page()) {
-        wp_enqueue_style('aai-home', get_template_directory_uri() . '/assets/css/aai-home.css', array('aai-style'), _S_VERSION);
-    }
-}
-add_action('wp_enqueue_scripts', 'aai_enqueue_styles');
