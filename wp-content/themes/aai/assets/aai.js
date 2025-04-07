@@ -145,12 +145,12 @@ if (bodyClasses.contains('post-template-default') === true) {
 // f*ck YITH 🤟
 
 let Target = document.querySelector('#primary.infinite');
-let TargetPosts = Target.querySelectorAll('article');
-if (TargetPosts.length > 0) {
+if (Target) {
+  let TargetPosts = Target.querySelectorAll('article');
   let secondToLastChild = TargetPosts[TargetPosts.length - 2];
   let NextUrl = document.querySelector('.navigation a.next, .navigation .nav-previous a');
   let isLoading = false;
-  if (Target && NextUrl) {
+  if ( Target && NextUrl) {
     const observer = new IntersectionObserver((entries) => {
       if (entries[0].isIntersecting && isLoading===false) {
         console.debug('intersecting' + entries[0]);
