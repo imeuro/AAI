@@ -18,53 +18,79 @@ get_header();
 $lastPostYear = '';
 $postCount = 0;
 $banda = 0;
+
+// Funzione per recuperare i billboard
+function get_billboards() {
+    $args = array(
+        'post_type' => 'billboards',
+        'posts_per_page' => -1,
+        'orderby' => 'meta_value_num',
+        'meta_key' => 'billboard_position',
+        'order' => 'ASC'
+    );
+    return new WP_Query($args);
+}
+
+// Recupera tutti i billboard
+$billboards = get_billboards();
+$billboards_array = array();
+if ($billboards->have_posts()) {
+    while ($billboards->have_posts()) {
+        $billboards->the_post();
+        $position = get_field('billboard_position');
+        $billboards_array[$position][] = array(
+            'link' => get_field('billboard_link'),
+            'thumbnail' => get_the_post_thumbnail_url(get_the_ID(), 'full'),
+            'new_tab' => get_field('billboard_new_tab')
+        );
+    }
+    wp_reset_postdata();
+}
 ?>
 
 	<main id="primary" class="content-area site-main homepage infinite">
 		<div class="posts" id="main">
 		<?php
-
 		// Get all post IDs of the post type you want to exclude
 		$excluded_post_ids = wp_list_pluck( get_posts( array( 'post_type' => 'biblioteca' ) ), 'ID' );
-		//print_r($excluded_post_ids);
-
 
 		$paged = (get_query_var('paged')) ? get_query_var('paged') : 1;
-		//print_r($paged);
 		$args = array(
 		    'post__not_in' => $excluded_post_ids,
 		    'paged' => $paged,
 			'posts_per_page' => get_option('posts_per_page'),
-
 		);
 		$HPquery = new WP_Query($args);
 
 		if ($HPquery->have_posts()) :
-
     		while ($HPquery->have_posts()) : 
     			$HPquery->the_post();
-
 				$postCount++;
 
-				/*
-				 * Include the Post-Type-specific template for the content.
-				 * If you want to override this in a child theme, then include a file
-				 * called content-___.php (where ___ is the Post Type name) and that will be used instead.
-				 */
 				get_template_part( 'template-parts/content', 'home' );
-
 				
+				// Visualizza i billboard dopo il post specificato
+				if (isset($billboards_array[$postCount])) {
+					foreach ($billboards_array[$postCount] as $billboard) {
+						if ($billboard['link'] && $billboard['thumbnail']) : 
+							$target = $billboard['new_tab'] ? ' target="_blank"' : '';
+						?>
+							<a href="<?php echo esc_url($billboard['link']); ?>" class="billboard"<?php echo $target; ?>>
+								<img src="<?php echo esc_url($billboard['thumbnail']); ?>" alt="<?php echo esc_attr(get_the_title()); ?>">
+							</a>
+						<?php endif;
+					}
+				}
+				
+				// Aggiungi i div 'banda-home' dopo ogni 3 post
 				if ($postCount % 3 === 0 && $postCount > 1) {
 					$banda++;
-					// echo $banda;
 					include(get_template_directory() . '/template-parts/home-links.php');
 				}
-
 			endwhile;
 
-		if ($HPquery->max_num_pages > 1) : ?> <!-- Importante: mostra navigazione solo se ci sono più pagine -->
+		if ($HPquery->max_num_pages > 1) : ?>
         <nav class="navigation pagination" role="navigation"> 
-			<!-- Classe navigation necessaria per YITH -->
             <div class="nav-links">
                 <?php
                 echo paginate_links(array(
@@ -85,11 +111,7 @@ $banda = 0;
         </nav>
 		<?php endif;
 
-
-
-			// Usa wp_reset_postdata() invece di wp_reset_query()
 			wp_reset_postdata();
-
 
 		else :
 

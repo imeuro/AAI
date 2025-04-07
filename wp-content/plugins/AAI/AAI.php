@@ -1,16 +1,78 @@
 <?php
-/*
-Plugin Name: AAI customizations
-Plugin URI: http://meuro.dev/
-Description: Custom functions & features on Gazzetta dell'Associazione Antiquari d'Italia
-Version: 0.2
-Author: Mauro Fioravanzi
-Author URI: http://imeuro.dev/
-*/
+/**
+ * Plugin Name: AAI
+ * Plugin URI: https://www.aai.it
+ * Description: Plugin per la gestione dei contenuti di AAI
+ * Version: 1.1.0
+ * Author: Meuro
+ * Author URI: https://www.meuro.it
+ * License: GPL v2 or later
+ * License URI: https://www.gnu.org/licenses/gpl-2.0.html
+ * Text Domain: aai
+ * Domain Path: /languages
+ */
 
-if( ! defined( 'ABSPATH') ) { exit; }
+// If this file is called directly, abort.
+if (!defined('WPINC')) {
+    die;
+}
 
+// Define plugin constants
+define('AAI_VERSION', '1.0.0');
+define('AAI_PLUGIN_DIR', plugin_dir_path(__FILE__));
+define('AAI_PLUGIN_URL', plugin_dir_url(__FILE__));
+
+// Include required files
 include('inc/custom-post-types-fields-taxonomies.php');
+
+// Register activation hook
+register_activation_hook(__FILE__, 'aai_activate');
+
+// Register deactivation hook
+register_deactivation_hook(__FILE__, 'aai_deactivate');
+
+// Activation function
+function aai_activate() {
+    // Activation code here
+    flush_rewrite_rules();
+}
+
+// Deactivation function
+function aai_deactivate() {
+    // Deactivation code here
+    flush_rewrite_rules();
+}
+
+// Enqueue scripts and styles
+function aai_enqueue_scripts() {
+    wp_enqueue_style('aai-style', AAI_PLUGIN_URL . 'assets/css/aai-style.css', array(), AAI_VERSION);
+    wp_enqueue_script('aai-script', AAI_PLUGIN_URL . 'assets/js/aai-script.js', array('jquery'), AAI_VERSION, true);
+}
+add_action('wp_enqueue_scripts', 'aai_enqueue_scripts');
+
+// Add admin menu
+function aai_admin_menu() {
+    add_menu_page(
+        'AAI Settings',
+        'AAI',
+        'manage_options',
+        'aai-settings',
+        'aai_settings_page',
+        'dashicons-admin-generic',
+        30
+    );
+}
+add_action('admin_menu', 'aai_admin_menu');
+
+// Settings page callback
+function aai_settings_page() {
+    ?>
+    <div class="wrap">
+        <h1><?php echo esc_html(get_admin_page_title()); ?></h1>
+        <p>Benvenuto nelle impostazioni di AAI.</p>
+    </div>
+    <?php
+}
 
 // DECLUTTER ADMIN SIDEBAR for STAFF user
 function remove_menus(){
@@ -81,3 +143,53 @@ function wereSafeNow() {
     <?php
 }
 add_action('wp_footer', 'wereSafeNow');
+
+// Aggiungi colonna personalizzata per la posizione dei billboard
+function aai_add_billboard_position_column($columns) {
+    $new_columns = array();
+    foreach ($columns as $key => $value) {
+        if ($key === 'title') {
+            $new_columns[$key] = $value;
+            $new_columns['billboard_position'] = 'Posizione';
+        } else {
+            $new_columns[$key] = $value;
+        }
+    }
+    return $new_columns;
+}
+add_filter('manage_billboards_posts_columns', 'aai_add_billboard_position_column');
+
+// Popola la colonna della posizione con il valore del campo ACF
+function aai_populate_billboard_position_column($column, $post_id) {
+    if ($column === 'billboard_position') {
+        $position = get_field('billboard_position', $post_id);
+        if ($position) {
+            echo 'Dopo il post ' . esc_html($position);
+        } else {
+            echo '—';
+        }
+    }
+}
+add_action('manage_billboards_posts_custom_column', 'aai_populate_billboard_position_column', 10, 2);
+
+// Rendi la colonna della posizione ordinabile
+function aai_billboard_position_sortable_column($columns) {
+    $columns['billboard_position'] = 'billboard_position';
+    return $columns;
+}
+add_filter('manage_edit-billboards_sortable_columns', 'aai_billboard_position_sortable_column');
+
+// Gestisci l'ordinamento per la colonna della posizione
+function aai_billboard_position_orderby($query) {
+    if (!is_admin() || !$query->is_main_query()) {
+        return;
+    }
+    
+    $orderby = $query->get('orderby');
+    
+    if ('billboard_position' === $orderby) {
+        $query->set('meta_key', 'billboard_position');
+        $query->set('orderby', 'meta_value_num');
+    }
+}
+add_action('pre_get_posts', 'aai_billboard_position_orderby');

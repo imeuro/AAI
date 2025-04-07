@@ -1,0 +1,25 @@
+.billboard {
+    display: block;
+    width: 100%;
+    margin: 2rem 0;
+    text-align: center;
+}
+
+.billboard img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 0 auto;
+}
+
+.billboard-top {
+    margin-top: 0;
+}
+
+.billboard-middle {
+    margin: 3rem 0;
+}
+
+.billboard-bottom {
+    margin-bottom: 0;
+} 
