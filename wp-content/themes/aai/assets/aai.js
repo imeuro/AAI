@@ -146,47 +146,49 @@ if (bodyClasses.contains('post-template-default') === true) {
 
 let Target = document.querySelector('#primary.infinite');
 let TargetPosts = Target.querySelectorAll('article');
-let secondToLastChild = TargetPosts[TargetPosts.length - 2];
-let NextUrl = document.querySelector('.navigation a.next, .navigation .nav-previous a');
-let isLoading = false;
-if (Target && NextUrl) {
-  const observer = new IntersectionObserver((entries) => {
-    if (entries[0].isIntersecting && isLoading===false) {
-      console.debug('intersecting' + entries[0]);
-      isLoading = true;
-      fetchPosts();
-    }
-  }, {
-    rootMargin: '0px',
-    threshold: 0.5,
-  });
-  observer.observe(secondToLastChild);
+if (TargetPosts.length > 0) {
+  let secondToLastChild = TargetPosts[TargetPosts.length - 2];
+  let NextUrl = document.querySelector('.navigation a.next, .navigation .nav-previous a');
+  let isLoading = false;
+  if (Target && NextUrl) {
+    const observer = new IntersectionObserver((entries) => {
+      if (entries[0].isIntersecting && isLoading===false) {
+        console.debug('intersecting' + entries[0]);
+        isLoading = true;
+        fetchPosts();
+      }
+    }, {
+      rootMargin: '0px',
+      threshold: 0.5,
+    });
+    observer.observe(secondToLastChild);
 
-  function fetchPosts() {
-    fetch(NextUrl.href)
-      .then(response => response.text())
-      .then(data => {
-        const parser = new DOMParser();
-        const NewDoc = parser.parseFromString(data, 'text/html');
-        let NewPosts = NewDoc.querySelectorAll('#primary.infinite article');
-        if (NewPosts) {
-          NextUrl = NewDoc.querySelector('.navigation a.next, .navigation .nav-previous a');
-          console.debug(NextUrl.href);
-          NewPosts.forEach(post => {
-            // console.debug(post);
-            secondToLastChild.parentElement.appendChild(post);
-          });
-          // prepare for next batch
-          let NewTarget = document.querySelector('#primary.infinite');
-          NewTarget.appendChild(NewDoc.querySelector('.navigation'));
-          secondToLastChild = NewPosts[NewPosts.length - 2];
-          observer.observe(secondToLastChild);
-          isLoading = false;
-          
-        } else {
-          // You've reached the end.
-        }
-      })
-      .catch(error => console.error(error));
+    function fetchPosts() {
+      fetch(NextUrl.href)
+        .then(response => response.text())
+        .then(data => {
+          const parser = new DOMParser();
+          const NewDoc = parser.parseFromString(data, 'text/html');
+          let NewPosts = NewDoc.querySelectorAll('#primary.infinite article');
+          if (NewPosts) {
+            NextUrl = NewDoc.querySelector('.navigation a.next, .navigation .nav-previous a');
+            console.debug(NextUrl.href);
+            NewPosts.forEach(post => {
+              // console.debug(post);
+              secondToLastChild.parentElement.appendChild(post);
+            });
+            // prepare for next batch
+            let NewTarget = document.querySelector('#primary.infinite');
+            NewTarget.appendChild(NewDoc.querySelector('.navigation'));
+            secondToLastChild = NewPosts[NewPosts.length - 2];
+            observer.observe(secondToLastChild);
+            isLoading = false;
+            
+          } else {
+            // You've reached the end.
+          }
+        })
+        .catch(error => console.error(error));
+    }
   }
 }
