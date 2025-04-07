@@ -39,6 +39,7 @@ if ($billboards->have_posts()) {
         $billboards->the_post();
         $position = get_field('billboard_position');
         $billboards_array[$position][] = array(
+            'title' => get_the_title(),
             'link' => get_field('billboard_link'),
             'thumbnail' => get_the_post_thumbnail_url(get_the_ID(), 'full'),
             'new_tab' => get_field('billboard_new_tab')
@@ -77,9 +78,9 @@ if ($billboards->have_posts()) {
 						?>
 							<div class="AAI-billboard AAI-billboard-<?php echo esc_attr($position); ?>">
 								<?php if ($billboard['link']) : ?>
-									<a href="<?php echo esc_url($billboard['link']); ?>"<?php echo $target; ?> title="<?php echo esc_attr(get_the_title()); ?>">
+									<a href="<?php echo esc_url($billboard['link']); ?>"<?php echo $target; ?> title="<?php echo esc_attr($billboard['title']); ?>">
 								<?php endif; ?>
-								<img src="<?php echo esc_url($billboard['thumbnail']); ?>" alt="<?php echo esc_attr(get_the_title()); ?>">
+								<img src="<?php echo esc_url($billboard['thumbnail']); ?>" alt="<?php echo esc_attr($billboard['title']); ?>">
 								<?php if ($billboard['link']) : ?>
 									</a>
 								<?php endif; ?>
