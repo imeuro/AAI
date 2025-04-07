@@ -148,27 +148,15 @@
  
 /* Stili per i billboard */
 .AAI-billboard {
-    margin-bottom: 30px;
+    margin-bottom: 100px;
     position: relative;
     overflow: hidden;
-    border-radius: 5px;
-    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .AAI-billboard img {
     width: 100%;
     height: auto;
     display: block;
-    transition: transform 0.3s ease;
-}
-
-.AAI-billboard:hover img {
-    transform: scale(1.05);
-}
-
-/* Stili per la colonna della posizione nella pagina di amministrazione */
-.column-billboard_position {
-    width: 15%;
 }
 
 /* Stili per i div 'banda-home' */

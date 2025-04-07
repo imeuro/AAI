@@ -45,9 +45,7 @@ function aai_deactivate() {
 
 // Enqueue scripts and styles
 function aai_enqueue_scripts() {
-    if (is_front_page()) {
-        wp_enqueue_style('aai-home', AAI_PLUGIN_URL . 'assets/css/aai-home.css', array(), AAI_VERSION);
-    }
+    // Il file CSS aai-home.css è stato spostato nel tema
 }
 add_action('wp_enqueue_scripts', 'aai_enqueue_scripts');
 
