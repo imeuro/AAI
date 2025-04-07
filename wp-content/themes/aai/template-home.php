@@ -75,9 +75,15 @@ if ($billboards->have_posts()) {
 						if ($billboard['link'] && $billboard['thumbnail']) : 
 							$target = $billboard['new_tab'] ? ' target="_blank"' : '';
 						?>
-							<a href="<?php echo esc_url($billboard['link']); ?>" class="billboard"<?php echo $target; ?>>
+							<div class="AAI-billboard AAI-billboard-<?php echo esc_attr($position); ?>">
+								<?php if ($billboard['link']) : ?>
+									<a href="<?php echo esc_url($billboard['link']); ?>"<?php echo $target; ?> title="<?php echo esc_attr(get_the_title()); ?>">
+								<?php endif; ?>
 								<img src="<?php echo esc_url($billboard['thumbnail']); ?>" alt="<?php echo esc_attr(get_the_title()); ?>">
-							</a>
+								<?php if ($billboard['link']) : ?>
+									</a>
+								<?php endif; ?>
+							</div>
 						<?php endif;
 					}
 				}

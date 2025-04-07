@@ -1,0 +1,214 @@
+/**
+ * Stili per il plugin AAI
+ */
+
+ /* HOMEPAGE */
+ .homepage.site-main,
+ .archive.site-main {
+     margin: 0 -5vw;
+     display: flex;
+     flex-flow: column;
+ }
+
+ .site-main .heading_year {
+     border-top: 1px solid rgba(var(--nero), .5);
+     display: block;
+     font-size: 96px;
+     font-weight: 300;
+     padding: 5px 20px;
+ }
+
+ /* opening item */
+ article.HP-item-opening a {
+     display: flex;
+     flex-flow: column-reverse nowrap;
+     align-items: flex-start;
+     justify-content: space-around;
+     position: relative;
+     margin-bottom: 40px;
+ }
+
+ article.HP-item-opening .entry-header {
+     display: inline-block;
+     width: 90vw;
+     margin: 15px 5vw 0 5vw;
+     position: relative;
+     z-index: 2;
+ }
+
+ article.HP-item-opening.post-odd .entry-header {
+     text-align: right;
+     margin: 15px 5vw 0 5vw;
+ }
+
+ article.HP-item-opening .entry-title {
+     margin: 0 0 20px 0;
+     font-size: 28px;
+     line-height: 32px;
+     color: rgba(var(--nero), 1.0);
+     font-family: 'MuseoSans-700', sans-serif;
+     font-weight: 700;
+     display: block;
+ }
+
+ article.HP-item-opening .entry-header p {
+     font-size: 14px;
+     line-height: 18px;
+     color: rgba(var(--nero), 1.0);
+     font-family: 'MuseoSans-300', sans-serif;
+     font-weight: 300;
+     display: block;
+ }
+
+ article.HP-item-opening .entry-header p.entry-auth {
+     font-size: 12px;
+     line-height: 16px;
+     font-family: 'MuseoSans-700', sans-serif;
+     font-weight: 700;
+ }
+
+ article.HP-item-opening .post-thumbnail {
+     display: inline-block;
+     width: 100vw;
+     opacity: 1;
+     transition: opacity 500ms ease-in;
+     position: relative;
+     z-index: 1;
+ }
+
+
+
+ @media all and (min-width: 62.5em) {
+     article.HP-item-opening .entry-header {
+         width: 40vw;
+         margin: 15px 20vw 0 5vw;
+     }
+
+     article.HP-item-opening.post-odd .entry-header {
+         text-align: right;
+         margin: 15px 5vw 0 20vw;
+     }
+
+     article.HP-item-opening.post-even a {
+         display: flex;
+         flex-flow: row nowrap;
+         align-items: flex-start;
+         justify-content: space-around;
+         position: relative;
+         margin-bottom: 100px;
+     }
+
+     article.HP-item-opening.post-odd a {
+         display: flex;
+         flex-flow: row-reverse nowrap;
+         align-items: flex-start;
+         justify-content: space-around;
+         position: relative;
+         margin-bottom: 100px;
+     }
+
+     article.HP-item-opening .entry-header {
+         display: inline-block;
+         width: 40vw;
+         margin: 80px 5vw 0 5vw;
+         position: relative;
+         z-index: 2;
+     }
+
+     article.HP-item-opening.post-odd .entry-header {
+         margin: 80px 5vw 0 5vw;
+     }
+
+     article.HP-item-opening .entry-title {
+         font-size: 48px;
+         line-height: 52px;
+     }
+
+     article.HP-item-opening .entry-header p {
+         font-size: 26px;
+         line-height: 28px;
+         margin: 0 0 10px 0;
+     }
+
+     article.HP-item-opening .entry-header p.entry-auth {
+         margin: 25px 0 10px 0;
+         font-size: 15px;
+         line-height: 20px;
+     }
+
+     article.HP-item-opening .post-thumbnail {
+         width: 60vw;
+     }
+
+     article.HP-item-opening.post-even .post-thumbnail {
+         text-align: right;
+     }
+
+ }
+ 
+/* Stili per i billboard */
+.AAI-billboard {
+    margin-bottom: 30px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.AAI-billboard img {
+    width: 100%;
+    height: auto;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.AAI-billboard:hover img {
+    transform: scale(1.05);
+}
+
+/* Stili per la colonna della posizione nella pagina di amministrazione */
+.column-billboard_position {
+    width: 15%;
+}
+
+/* Stili per i div 'banda-home' */
+section.banda-home {
+    margin: -30px 0 100px 0;
+    padding: 30px 0 20px 0;
+}
+
+section.banda-home .section-title {
+    background-color: rgba(var(--bianchino), 0.5);
+    text-align: right;
+    font-size: 30px;
+    font-weight: 700;
+    line-height: 1;
+}
+
+section.banda-home .section-title:before,
+section.banda-home .section-title:after {
+    content: "";
+    display: block;
+    background-image: url('../img/separator.png');
+    height: 20px;
+}
+
+section.banda-home .section-title:after {
+    transform: rotate(180deg);
+}
+
+section.banda-home .section-title a {
+    padding: 30px 30px;
+    display: block;
+    width: 100%;
+}
+
+@media (min-width: 62.5em) {
+    section.banda-home .section-title {
+        font-size: 43px;
+    }
+
+    section.banda-home .section-title a {
+        padding: 30px 150px;
+    }
+}

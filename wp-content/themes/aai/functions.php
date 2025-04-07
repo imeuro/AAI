@@ -274,3 +274,9 @@ function aai_billboards_styles() {
     wp_enqueue_style('aai-billboards', get_template_directory_uri() . '/assets/css/billboards.css', array(), _S_VERSION);
 }
 add_action('wp_enqueue_scripts', 'aai_billboards_styles');
+
+// Registra e carica il file CSS aai.css
+function aai_enqueue_styles() {
+    wp_enqueue_style('aai-theme-style', get_template_directory_uri() . '/assets/css/aai.css', array(), _S_VERSION);
+}
+add_action('wp_enqueue_scripts', 'aai_enqueue_styles');

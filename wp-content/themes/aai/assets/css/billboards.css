@@ -1,25 +1,26 @@
-.billboard {
-    display: block;
-    width: 100%;
-    margin: 2rem 0;
-    text-align: center;
+.AAI-billboard {
+    margin-bottom: 30px;
+    position: relative;
+    overflow: hidden;
+    border-radius: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
 }
 
-.billboard img {
-    max-width: 100%;
+.AAI-billboard img {
+    width: 100%;
     height: auto;
     display: block;
-    margin: 0 auto;
+    transition: transform 0.3s ease;
 }
 
-.billboard-top {
+.AAI-billboard-top {
     margin-top: 0;
 }
 
-.billboard-middle {
-    margin: 3rem 0;
+.AAI-billboard-middle {
+    margin: 30px 0;
 }
 
-.billboard-bottom {
+.AAI-billboard-bottom {
     margin-bottom: 0;
 } 

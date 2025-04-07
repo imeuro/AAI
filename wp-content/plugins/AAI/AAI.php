@@ -45,8 +45,9 @@ function aai_deactivate() {
 
 // Enqueue scripts and styles
 function aai_enqueue_scripts() {
-    wp_enqueue_style('aai-style', AAI_PLUGIN_URL . 'assets/css/aai-style.css', array(), AAI_VERSION);
-    wp_enqueue_script('aai-script', AAI_PLUGIN_URL . 'assets/js/aai-script.js', array('jquery'), AAI_VERSION, true);
+    if (is_front_page()) {
+        wp_enqueue_style('aai-home', AAI_PLUGIN_URL . 'assets/css/aai-home.css', array(), AAI_VERSION);
+    }
 }
 add_action('wp_enqueue_scripts', 'aai_enqueue_scripts');
 
@@ -102,24 +103,17 @@ function remove_menus(){
 add_action( 'admin_menu', 'remove_menus', 999999 );
 
 
+// Modifica le colonne dei post standard, escludendo i billboard
 add_filter( 'manage_posts_columns', 'custom_post_columns', 10, 2 );
 function custom_post_columns( $columns, $post_type ) {
-  switch ( $post_type ) {    
-    case 'post':
+  // Applica solo ai post standard, non ai billboard
+  if ($post_type === 'post') {
     unset(
       $columns['author'],
       $columns['tags'],
       $columns['comments']
     );
-    break;
-    // case 'gallery':
-    // unset(
-    //   $columns['post_type'],
-    //   $columns['author']
-    // );
-    // break;
   }
-     
   return $columns;
 }
 

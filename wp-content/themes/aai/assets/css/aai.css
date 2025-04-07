@@ -11,17 +11,17 @@
 /* FONTS */
 @font-face {
   font-family: 'MuseoSans-500';
-  src: url('./fonts/museo/MuseoSans-500/font.woff2') format('woff2'), url('./fonts/museo/MuseoSans-500/font.woff') format('woff');
+  src: url('../fonts/museo/MuseoSans-500/font.woff2') format('woff2'), url('../fonts/museo/MuseoSans-500/font.woff') format('woff');
   font-display: swap;
 }
 @font-face {
   font-family: 'MuseoSans-700';
-  src: url('./fonts/museo/MuseoSans-700/font.woff2') format('woff2'), url('./fonts/museo/MuseoSans-700/font.woff') format('woff');
+  src: url('../fonts/museo/MuseoSans-700/font.woff2') format('woff2'), url('../fonts/museo/MuseoSans-700/font.woff') format('woff');
   font-display: swap;
 }
 @font-face {
   font-family: 'MuseoSans-300';
-  src: url('./fonts/museo/MuseoSans-300/font.woff2') format('woff2'), url('./fonts/museo/MuseoSans-300/font.woff') format('woff');
+  src: url('../fonts/museo/MuseoSans-300/font.woff2') format('woff2'), url('../fonts/museo/MuseoSans-300/font.woff') format('woff');
   font-display: swap;
 } 
 
@@ -229,11 +229,11 @@ header#masthead {
     right: 5vw;
     width: 30px;
     height: 34px;
-    background: url('./img/hamb.svg') no-repeat center center;
+    background: url('../img/hamb.svg') no-repeat center center;
     border: none;
 }
 .main-navigation.toggled button.menu-toggle {
-    background: url('./img/x.svg') no-repeat center center;
+    background: url('../img/x.svg') no-repeat center center;
     top: 40px;
 }
 .main-navigation .menu-topp-container,
@@ -536,45 +536,36 @@ article.HP-item-opening .post-thumbnail {
 
 }
 
-/* Bande in home */
-
-section.banda-home {
-    margin: -30px 0 100px 0;
-    padding: 30px 0 20px 0;
+/* Stili per la paginazione */
+.navigation.pagination {
+    margin: 30px 0;
+    text-align: center;
 }
 
-section.banda-home .section-title {
-    background-color: rgba(var(--bianchino), 0.5);
-    text-align: right;
-    font-size: 30px;
-    font-weight: 700;
-    line-height: 1;
+.nav-links {
+    display: inline-block;
 }
 
-section.banda-home .section-title:before,
-section.banda-home .section-title:after  {
-    content: "";
-    display: block;
-    background-image: url('./img/separator.png');
-    height: 20px;
-}
-section.banda-home .section-title:after {
-    transform: rotate(180deg);
-}
-section.banda-home .section-title a {
-    padding: 30px 30px;
-    display: block;
-    width: 100%;
-}
-@media (min-width: 62.5em) {
-    section.banda-home .section-title {
-        font-size: 43px;
-    }
-    section.banda-home .section-title a {
-        padding: 30px 150px;
-    }
+.nav-links a,
+.nav-links span {
+    display: inline-block;
+    padding: 5px 10px;
+    margin: 0 5px;
+    border: 1px solid #ddd;
+    border-radius: 3px;
+    text-decoration: none;
+    color: #333;
 }
 
+.nav-links a:hover {
+    background-color: #f5f5f5;
+}
+
+.nav-links .current {
+    background-color: #0073aa;
+    color: white;
+    border-color: #0073aa;
+}
 
 
 /* SINGLE POST */
@@ -979,7 +970,7 @@ body:not(.home) #home-link {
     right: calc(var(--spacer-unit)* 2);
     width: 35px;
     height: 35px;
-    background: url('./img/arrow-up.svg') no-repeat center center rgba(var(--bianco), 1);
+    background: url('../img/arrow-up.svg') no-repeat center center rgba(var(--bianco), 1);
     background-size: 25px 20px;
     border-radius: 4px;
     transform: rotate(-90deg);
@@ -990,7 +981,7 @@ body:not(.home) #home-link {
 body:not(.home) #home-link {
     right: initial;
     left: calc(var(--spacer-unit)* 2);
-    background: url('./img/arrow-home.svg') no-repeat center center rgba(var(--bianco), 1);
+    background: url('../img/arrow-home.svg') no-repeat center center rgba(var(--bianco), 1);
     background-size: 25px 22px;
     transform: rotate(90deg);
 }
