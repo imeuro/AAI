@@ -195,6 +195,13 @@ section.banda-home .section-title a {
 }
 
 @media (min-width: 62.5em) {
+    .AAI-billboard {
+        margin: 100px;
+        max-height: none;
+    }
+    .AAI-billboard img {
+        max-height: none;
+    }
     section.banda-home .section-title {
         font-size: 43px;
     }
