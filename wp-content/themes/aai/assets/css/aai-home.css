@@ -151,12 +151,14 @@
     margin-bottom: 100px;
     position: relative;
     overflow: hidden;
+    max-height: 90dvh;
+    text-align: center;
 }
 
 .AAI-billboard img {
     width: 100%;
     height: auto;
-    display: block;
+    display: inline-block;
 }
 
 /* Stili per i div 'banda-home' */
