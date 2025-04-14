@@ -147,7 +147,7 @@
  }
  
 /* Stili per i billboard */
-.AAI-billboard {
+/* .AAI-billboard {
     margin-bottom: 100px;
     position: relative;
     overflow: hidden;
@@ -160,11 +160,11 @@
     height: 100%;
     max-height: 90dvh;
      display: inline-block;
-}
+} */
 
 /* Stili per i div 'banda-home' */
 section.banda-home {
-    margin: -30px 0 100px 0;
+    margin: -30px 0 30px 0;
     padding: 30px 0 20px 0;
 }
 
@@ -195,13 +195,26 @@ section.banda-home .section-title a {
 }
 
 @media (min-width: 62.5em) {
-    .AAI-billboard {
+    /* .AAI-billboard {
         margin: 100px;
         max-height: none;
     }
     .AAI-billboard img {
         max-height: none;
+    } */
+
+    .AAI-billboard.post-odd {
+        margin-left: 60px;
     }
+
+    .AAI-billboard.post-even {
+        margin-right: 60px;
+    }
+
+    section.banda-home {
+        margin: -30px 0 100px 0;
+    }
+
     section.banda-home .section-title {
         font-size: 43px;
     }

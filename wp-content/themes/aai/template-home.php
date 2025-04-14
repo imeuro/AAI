@@ -73,24 +73,29 @@ if ($billboards->have_posts()) {
 				// Visualizza i billboard dopo il post specificato
 				if (isset($billboards_array[$postCount])) {
 					foreach ($billboards_array[$postCount] as $billboard) {
+						$postCount++;
+						$posteven = $postCount % 2 ? 'post-even' : 'post-odd';
 						if ($billboard['link'] && $billboard['thumbnail']) : 
 							$target = $billboard['new_tab'] ? ' target="_blank"' : '';
 						?>
-							<div class="AAI-billboard AAI-billboard-<?php echo esc_attr($position); ?>">
+							<article id="AAI-billboard-<?php echo esc_attr($position); ?>" class="HP-item-opening AAI-billboard <?php echo $posteven; ?>">
 								<?php if ($billboard['link']) : ?>
 									<a href="<?php echo esc_url($billboard['link']); ?>"<?php echo $target; ?> title="<?php echo esc_attr($billboard['title']); ?>">
 								<?php endif; ?>
-								<img src="<?php echo esc_url($billboard['thumbnail']); ?>" alt="<?php echo esc_attr($billboard['title']); ?>">
+								<header class="entry-header"></header>
+								<div class="post-thumbnail">
+									<img src="<?php echo esc_url($billboard['thumbnail']); ?>" alt="<?php echo esc_attr($billboard['title']); ?>">
+								</div>
 								<?php if ($billboard['link']) : ?>
 									</a>
 								<?php endif; ?>
-							</div>
+								</article>
 						<?php endif;
 					}
 				}
 				
 				// Aggiungi i div 'banda-home' dopo ogni 3 post
-				if ($postCount % 3 === 0 && $postCount > 1) {
+				if ($postCount % 4 === 0 && $postCount > 1) {
 					$banda++;
 					include(get_template_directory() . '/template-parts/home-links.php');
 				}
