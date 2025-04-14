@@ -16,7 +16,8 @@
 
 get_header();
 $lastPostYear = '';
-$postCount = 0;
+$postCount = 0; // Contatore per i post totali
+$postCountReal = 0; // Contatore per i post reali (escludendo i billboard)
 $banda = 0;
 
 // Funzione per recuperare i billboard
@@ -67,18 +68,24 @@ if ($billboards->have_posts()) {
     		while ($HPquery->have_posts()) : 
     			$HPquery->the_post();
 				$postCount++;
+				$postCountReal++;
+				
+				// echo '<pre>';
+				// echo $postCount.' - '.$postCountReal;
+				// echo '</pre>';
 
 				get_template_part( 'template-parts/content', 'home' );
 				
 				// Visualizza i billboard dopo il post specificato
-				if (isset($billboards_array[$postCount])) {
-					foreach ($billboards_array[$postCount] as $billboard) {
+				if (isset($billboards_array[$postCountReal])) {
+					foreach ($billboards_array[$postCountReal] as $billboard) {
 						$postCount++;
 						$posteven = $postCount % 2 ? 'post-even' : 'post-odd';
+						
 						if ($billboard['link'] && $billboard['thumbnail']) : 
 							$target = $billboard['new_tab'] ? ' target="_blank"' : '';
 						?>
-							<article id="AAI-billboard-<?php echo esc_attr($position); ?>" class="HP-item-opening AAI-billboard <?php echo $posteven; ?>">
+							<article id="AAI-billboard-<?php echo esc_attr($postCount); ?>" class="HP-item-opening AAI-billboard <?php echo $posteven; ?>">
 								<?php if ($billboard['link']) : ?>
 									<a href="<?php echo esc_url($billboard['link']); ?>"<?php echo $target; ?> title="<?php echo esc_attr($billboard['title']); ?>">
 								<?php endif; ?>
@@ -95,7 +102,7 @@ if ($billboards->have_posts()) {
 				}
 				
 				// Aggiungi i div 'banda-home' dopo ogni 3 post
-				if ($postCount % 4 === 0 && $postCount > 1) {
+				if ($postCountReal % 4 === 0 && $postCountReal > 1) {
 					$banda++;
 					include(get_template_directory() . '/template-parts/home-links.php');
 				}

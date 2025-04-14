@@ -204,11 +204,11 @@ section.banda-home .section-title a {
     } */
 
     .AAI-billboard.post-odd {
-        margin-left: 60px;
+        transform: translateX(60px);
     }
 
     .AAI-billboard.post-even {
-        margin-right: 60px;
+        transform: translateX(-60px);
     }
 
     section.banda-home {
