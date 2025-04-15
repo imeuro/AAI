@@ -98,18 +98,19 @@ if ($billboards->have_posts()) {
 						$postCount++;
 						$posteven = $postCount % 2 ? 'post-even' : 'post-odd';
 						
-						if ($billboard['link'] && $billboard['thumbnail']) : 
-							$target = $billboard['new_tab'] ? ' target="_blank"' : '';
+						// Verifica solo che esista la thumbnail, il link è opzionale
+						if ($billboard['thumbnail']) : 
+							$target = isset($billboard['new_tab']) && $billboard['new_tab'] ? ' target="_blank"' : '';
 						?>
 							<article id="AAI-billboard-<?php echo esc_attr($postCount); ?>" class="HP-item-opening AAI-billboard <?php echo $posteven; ?>">
-								<?php if ($billboard['link']) : ?>
+								<?php if (isset($billboard['link']) && $billboard['link']) : ?>
 									<a href="<?php echo esc_url($billboard['link']); ?>"<?php echo $target; ?> title="<?php echo esc_attr($billboard['title']); ?>">
 								<?php endif; ?>
 								<header class="entry-header"></header>
 								<div class="post-thumbnail">
 									<img src="<?php echo esc_url($billboard['thumbnail']); ?>" alt="<?php echo esc_attr($billboard['title']); ?>">
 								</div>
-								<?php if ($billboard['link']) : ?>
+								<?php if (isset($billboard['link']) && $billboard['link']) : ?>
 									</a>
 								<?php endif; ?>
 								</article>
