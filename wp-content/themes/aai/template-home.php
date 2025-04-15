@@ -22,12 +22,28 @@ $banda = 0;
 
 // Funzione per recuperare i billboard
 function get_billboards() {
+    $today = date('Y-m-d');
     $args = array(
         'post_type' => 'billboards',
         'posts_per_page' => -1,
         'orderby' => 'meta_value_num',
         'meta_key' => 'billboard_position',
-        'order' => 'ASC'
+        'order' => 'ASC',
+        'meta_query' => array(
+            'relation' => 'AND',
+            array(
+                'key' => 'billboard_start_date',
+                'value' => $today,
+                'compare' => '<=',
+                'type' => 'DATE'
+            ),
+            array(
+                'key' => 'billboard_end_date',
+                'value' => $today,
+                'compare' => '>=',
+                'type' => 'DATE'
+            )
+        )
     );
     return new WP_Query($args);
 }

@@ -3,7 +3,7 @@
  * Plugin Name: AAI
  * Plugin URI: https://www.aai.it
  * Description: Plugin per la gestione dei contenuti di AAI
- * Version: 1.1.0
+ * Version: 1.1.1
  * Author: Meuro
  * Author URI: https://www.meuro.it
  * License: GPL v2 or later
@@ -43,25 +43,20 @@ function aai_deactivate() {
     flush_rewrite_rules();
 }
 
-// Enqueue scripts and styles
-function aai_enqueue_scripts() {
-    // Il file CSS aai-home.css è stato spostato nel tema
-}
-add_action('wp_enqueue_scripts', 'aai_enqueue_scripts');
 
 // Add admin menu
-function aai_admin_menu() {
-    add_menu_page(
-        'AAI Settings',
-        'AAI',
-        'manage_options',
-        'aai-settings',
-        'aai_settings_page',
-        'dashicons-admin-generic',
-        30
-    );
-}
-add_action('admin_menu', 'aai_admin_menu');
+// function aai_admin_menu() {
+//     add_menu_page(
+//         'AAI Settings',
+//         'AAI',
+//         'manage_options',
+//         'aai-settings',
+//         'aai_settings_page',
+//         'dashicons-admin-generic',
+//         30
+//     );
+// }
+// add_action('admin_menu', 'aai_admin_menu');
 
 // Settings page callback
 function aai_settings_page() {
