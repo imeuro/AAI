@@ -131,52 +131,79 @@ function wereSafeNow() {
 }
 add_action('wp_footer', 'wereSafeNow');
 
-// Aggiungi colonna personalizzata per la posizione dei billboard
-function aai_add_billboard_position_column($columns) {
+
+
+
+// Aggiungi colonne personalizzate per i billboard
+function aai_add_billboard_columns($columns) {
     $new_columns = array();
     foreach ($columns as $key => $value) {
         if ($key === 'title') {
             $new_columns[$key] = $value;
             $new_columns['billboard_position'] = 'Posizione';
+            $new_columns['billboard_start_date'] = 'Data Inizio';
+            $new_columns['billboard_end_date'] = 'Data Fine';
         } else {
             $new_columns[$key] = $value;
         }
     }
     return $new_columns;
 }
-add_filter('manage_billboards_posts_columns', 'aai_add_billboard_position_column');
+add_filter('manage_billboards_posts_columns', 'aai_add_billboard_columns');
 
-// Popola la colonna della posizione con il valore del campo ACF
-function aai_populate_billboard_position_column($column, $post_id) {
-    if ($column === 'billboard_position') {
-        $position = get_field('billboard_position', $post_id);
-        if ($position) {
-            echo 'Dopo il post ' . esc_html($position);
-        } else {
-            echo '—';
-        }
+// Popola le colonne personalizzate con i valori dei campi ACF
+function aai_populate_billboard_columns($column, $post_id) {
+    switch($column) {
+        case 'billboard_position':
+            $position = get_field('billboard_position', $post_id);
+            if ($position) {
+                echo 'Dopo il post ' . esc_html($position);
+            } else {
+                echo '—';
+            }
+            break;
+        case 'billboard_start_date':
+            $start_date = get_field('billboard_start_date', $post_id);
+            echo $start_date ? date('d/m/Y', strtotime($start_date)) : '—';
+            break;
+        case 'billboard_end_date':
+            $end_date = get_field('billboard_end_date', $post_id);
+            echo $end_date ? date('d/m/Y', strtotime($end_date)) : '—';
+            break;
     }
 }
-add_action('manage_billboards_posts_custom_column', 'aai_populate_billboard_position_column', 10, 2);
+add_action('manage_billboards_posts_custom_column', 'aai_populate_billboard_columns', 10, 2);
 
-// Rendi la colonna della posizione ordinabile
-function aai_billboard_position_sortable_column($columns) {
+// Rendi le colonne ordinabili
+function aai_billboard_sortable_columns($columns) {
     $columns['billboard_position'] = 'billboard_position';
+    $columns['billboard_start_date'] = 'billboard_start_date';
+    $columns['billboard_end_date'] = 'billboard_end_date';
     return $columns;
 }
-add_filter('manage_edit-billboards_sortable_columns', 'aai_billboard_position_sortable_column');
+add_filter('manage_edit-billboards_sortable_columns', 'aai_billboard_sortable_columns');
 
-// Gestisci l'ordinamento per la colonna della posizione
-function aai_billboard_position_orderby($query) {
+// Gestisci l'ordinamento per le colonne
+function aai_billboard_orderby($query) {
     if (!is_admin() || !$query->is_main_query()) {
         return;
     }
     
     $orderby = $query->get('orderby');
     
-    if ('billboard_position' === $orderby) {
-        $query->set('meta_key', 'billboard_position');
-        $query->set('orderby', 'meta_value_num');
+    switch($orderby) {
+        case 'billboard_position':
+            $query->set('meta_key', 'billboard_position');
+            $query->set('orderby', 'meta_value_num');
+            break;
+        case 'billboard_start_date':
+            $query->set('meta_key', 'billboard_start_date');
+            $query->set('orderby', 'meta_value');
+            break;
+        case 'billboard_end_date':
+            $query->set('meta_key', 'billboard_end_date');
+            $query->set('orderby', 'meta_value');
+            break;
     }
 }
-add_action('pre_get_posts', 'aai_billboard_position_orderby');
+add_action('pre_get_posts', 'aai_billboard_orderby');
