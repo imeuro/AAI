@@ -115,6 +115,12 @@ if (bodyClasses.contains('post-template-default') === true) {
             if (document.documentElement.scrollTop >= scrolltrigger && !fillnonce){
               console.debug('metà pagina: '+scrolltrigger);
 
+              // Carica e applica gli stili di aai-home.css
+              const aaiHomeStyles = document.createElement('link');
+              aaiHomeStyles.rel = 'stylesheet';
+              aaiHomeStyles.href = basepath + '/wp-content/themes/aai/assets/css/aai-home.css';
+              document.head.appendChild(aaiHomeStyles);
+              
               // fill the div
               postareaDiv.innerHTML = HPDOM;
 
