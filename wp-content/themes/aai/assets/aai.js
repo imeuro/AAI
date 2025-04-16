@@ -118,9 +118,9 @@ if (bodyClasses.contains('post-template-default') === true) {
               // Carica e applica gli stili di aai-home.css
               const aaiHomeStyles = document.createElement('link');
               aaiHomeStyles.rel = 'stylesheet';
-              aaiHomeStyles.href = basepath + '/wp-content/themes/aai/assets/css/aai-home.css';
+              aaiHomeStyles.href = themepath +'/assets/css/aai-home.css';
               document.head.appendChild(aaiHomeStyles);
-              
+
               // fill the div
               postareaDiv.innerHTML = HPDOM;
 
